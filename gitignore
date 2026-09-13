@@ -1,0 +1,17 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swp~
+*~
+
+# Logs
+*.log
+
+# Local env files (not used by this project, but ignored just in case)
+.env

@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book of Shadows</title>
+
+  <!-- ── Google Fonts ── -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Syne:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet"/>
+
+  <!-- ── Stylesheet ── -->
+  <link rel="stylesheet" href="wiccan-main.css"/>
+</head>
+<body>
+
+<!-- ══════════════════════════════
+     BOOK OF SHADOWS
+     ~/>  0x75  ·  v1q
+══════════════════════════════ -->
+<div id="app">
+
+  <!-- ── HEADER ── -->
+  <header id="header">
+    <div class="header-left">
+      <div class="app-wordmark">
+        <span class="wordmark-sub">Book of</span>
+        <span class="wordmark-main">Shadows</span>
+      </div>
+    </div>
+
+    <div class="header-center">
+      <div id="live-clock">
+        <span id="clock-time">00:00:00</span>
+        <span id="clock-date"></span>
+      </div>
+    </div>
+
+    <div class="header-right">
+      <!-- Entry type selector buttons -->
+      <button class="type-btn active" data-type="journal"  title="Journal Entry">&#x1F4D3; Journal</button>
+      <button class="type-btn" data-type="spell"   title="Spell">&#x1F52E; Spell</button>
+      <button class="type-btn" data-type="ritual"  title="Ritual / Altar">&#x1F56F; Ritual</button>
+      <button class="type-btn" data-type="rede"    title="Rede / Chant / Blessing">&#x1F4DC; Rede</button>
+      <button class="type-btn" data-type="tarot"   title="Tarot Reading">&#x1F0CF; Tarot</button>
+      <div class="divider-v"></div>
+      <button class="hdr-btn" id="btn-reader"   title="Read the Book">&#x1F4D6; Read</button>
+      <button class="hdr-btn" id="btn-calendar" title="Wheel of the Year">&#x1F5D3; Calendar</button>
+      <div id="storage-status" class="storage-status loaded">0 entries</div>
+    </div>
+  </header><!-- /header -->
+
+
+  <!-- ── MAIN LAYOUT ── -->
+  <div id="main">
+
+    <!-- ══════════════════════════════
+         COMPOSER PANEL
+         All entry-type forms live here; only one visible at a time.
+    ══════════════════════════════ -->
+    <div id="composer">
+
+      <!-- ── Date stamp ── -->
+      <div class="composer-datestamp">
+        <span id="stamp-day"></span>
+        <span id="stamp-date"></span>
+        <span id="stamp-time"></span>
+      </div>
+
+      <!-- ══════════════════════════════
+           JOURNAL COMPOSER
+      ══════════════════════════════ -->
+      <div class="entry-form" id="form-journal">
+        <div class="composer-field">
+          <input type="text" id="journal-title" class="composer-title-input" placeholder="Entry title (optional)&hellip;" autocomplete="off" spellcheck="true"/>
+        </div>
+        <div class="composer-field">
+          <textarea id="journal-body" class="composer-body" placeholder="What stirs within&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Mood -->
+        <div class="composer-row">
+          <label class="composer-label">Mood</label>
+          <div class="mood-grid" id="mood-grid">
+            <button class="mood-btn active" data-mood="&#x2728; inspired">&#x2728; Inspired</button>
+            <button class="mood-btn" data-mood="&#x1F33F; peaceful">&#x1F33F; Peaceful</button>
+            <button class="mood-btn" data-mood="&#x1F525; energised">&#x1F525; Energised</button>
+            <button class="mood-btn" data-mood="&#x1F327; melancholic">&#x1F327; Melancholic</button>
+            <button class="mood-btn" data-mood="&#x1F311; introspective">&#x1F311; Introspective</button>
+            <button class="mood-btn" data-mood="&#x1F315; grateful">&#x1F315; Grateful</button>
+            <button class="mood-btn" data-mood="&#x26A1; restless">&#x26A1; Restless</button>
+            <button class="mood-btn" data-mood="&#x1F56F; reflective">&#x1F56F; Reflective</button>
+          </div>
+        </div>
+
+        <!-- Tags -->
+        <div class="composer-row">
+          <label class="composer-label">Tags</label>
+          <input type="text" id="journal-tags" class="composer-tags-input" placeholder="tag1, tag2&hellip;" autocomplete="off"/>
+        </div>
+
+        <!-- Emoji strip -->
+        <div class="composer-row">
+          <label class="composer-label">Emoji</label>
+          <div class="emoji-strip" id="emoji-strip">
+            <button class="emoji-btn" data-emoji="🌙">🌙</button>
+            <button class="emoji-btn" data-emoji="⭐">⭐</button>
+            <button class="emoji-btn" data-emoji="🔮">🔮</button>
+            <button class="emoji-btn" data-emoji="🕯">🕯</button>
+            <button class="emoji-btn" data-emoji="🌿">🌿</button>
+            <button class="emoji-btn" data-emoji="🌺">🌺</button>
+            <button class="emoji-btn" data-emoji="🍂">🍂</button>
+            <button class="emoji-btn" data-emoji="❄️">❄️</button>
+            <button class="emoji-btn" data-emoji="🌊">🌊</button>
+            <button class="emoji-btn" data-emoji="🔥">🔥</button>
+            <button class="emoji-btn" data-emoji="💀">💀</button>
+            <button class="emoji-btn" data-emoji="🌑">🌑</button>
+            <button class="emoji-btn" data-emoji="🌕">🌕</button>
+            <button class="emoji-btn" data-emoji="☽">☽</button>
+            <button class="emoji-btn" data-emoji="✨">✨</button>
+            <button class="emoji-btn" data-emoji="🗝">🗝</button>
+            <button class="emoji-btn" data-emoji="📜">📜</button>
+            <button class="emoji-btn" data-emoji="🖤">🖤</button>
+            <button class="emoji-btn" data-emoji="💛">💛</button>
+            <button class="emoji-btn" data-emoji="🌱">🌱</button>
+            <button class="emoji-btn" data-emoji="🦋">🦋</button>
+            <button class="emoji-btn" data-emoji="🐝">🐝</button>
+            <button class="emoji-btn" data-emoji="🫖">🫖</button>
+            <button class="emoji-btn" data-emoji="🪄">🪄</button>
+          </div>
+        </div>
+
+        <!-- Pin -->
+        <div class="composer-row composer-row-inline">
+          <label class="pin-label">
+            <input type="checkbox" id="journal-pinned"/>
+            <span>&#x1F4CC; Pin this entry</span>
+          </label>
+        </div>
+
+        <!-- ── IMAGE UPLOAD — Journal ── -->
+        <div class="img-upload-section">
+          <label class="composer-label">Images</label>
+          <div class="img-upload-controls">
+            <button class="img-pick-btn" data-form="journal" type="button">&#x1F4CE; Add Images</button>
+            <div class="img-url-row">
+              <input type="text" class="img-url-input" data-form="journal" placeholder="Or paste image URL&hellip;" autocomplete="off"/>
+              <button class="img-url-btn" data-form="journal" type="button">Add</button>
+            </div>
+          </div>
+          <div class="img-preview-strip" id="img-preview-strip-journal"></div>
+        </div>
+
+      </div><!-- /form-journal -->
+
+
+      <!-- ══════════════════════════════
+           SPELL COMPOSER
+      ══════════════════════════════ -->
+      <div class="entry-form hidden" id="form-spell">
+        <div class="composer-field">
+          <input type="text" id="spell-title" class="composer-title-input" placeholder="Spell name&hellip;" autocomplete="off" spellcheck="true"/>
+        </div>
+
+        <!-- Spell category -->
+        <div class="composer-row">
+          <label class="composer-label">Category</label>
+          <div class="pill-grid" id="spell-category-grid">
+            <button class="pill-btn active" data-val="protection">&#x1F6E1; Protection</button>
+            <button class="pill-btn" data-val="money">&#x1F4B0; Money</button>
+            <button class="pill-btn" data-val="prosperity">&#x1F33B; Prosperity</button>
+            <button class="pill-btn" data-val="love">&#x2764;&#xFE0F; Love</button>
+            <button class="pill-btn" data-val="banishing">&#x1F6AB; Banishing</button>
+            <button class="pill-btn" data-val="healing">&#x1F49A; Healing</button>
+            <button class="pill-btn" data-val="divination">&#x1F52E; Divination</button>
+            <button class="pill-btn" data-val="binding">&#x1F9F5; Binding</button>
+            <button class="pill-btn" data-val="cleansing">&#x1F32C; Cleansing</button>
+            <button class="pill-btn" data-val="fertility">&#x1F331; Fertility</button>
+            <button class="pill-btn" data-val="hex">&#x26A1; Hex</button>
+            <button class="pill-btn" data-val="other">&#x1F300; Other</button>
+          </div>
+        </div>
+
+        <!-- Moon phase for working -->
+        <div class="composer-row">
+          <label class="composer-label">Moon Phase</label>
+          <div class="pill-grid" id="spell-moon-grid">
+            <button class="pill-btn active" data-val="any">Any</button>
+            <button class="pill-btn" data-val="new">&#x1F311; New</button>
+            <button class="pill-btn" data-val="waxing">&#x1F312; Waxing</button>
+            <button class="pill-btn" data-val="full">&#x1F315; Full</button>
+            <button class="pill-btn" data-val="waning">&#x1F318; Waning</button>
+            <button class="pill-btn" data-val="dark">&#x1F312; Dark Moon</button>
+          </div>
+        </div>
+
+        <!-- Ingredients / components -->
+        <div class="composer-row">
+          <label class="composer-label">Ingredients &amp; Components</label>
+          <textarea id="spell-ingredients" class="composer-body" style="min-height:80px" placeholder="Candles, herbs, crystals, oils, sigils&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Intention -->
+        <div class="composer-row">
+          <label class="composer-label">Intention</label>
+          <textarea id="spell-intention" class="composer-body" style="min-height:60px" placeholder="State your intention clearly&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Working notes / method -->
+        <div class="composer-row">
+          <label class="composer-label">Working &amp; Notes</label>
+          <textarea id="spell-notes" class="composer-body" style="min-height:120px" placeholder="Steps, timing, observations, results&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <div class="composer-row">
+          <label class="composer-label">Tags</label>
+          <input type="text" id="spell-tags" class="composer-tags-input" placeholder="tag1, tag2&hellip;" autocomplete="off"/>
+        </div>
+
+        <!-- ── IMAGE UPLOAD — Spell ── -->
+        <div class="img-upload-section">
+          <label class="composer-label">Images</label>
+          <div class="img-upload-controls">
+            <button class="img-pick-btn" data-form="spell" type="button">&#x1F4CE; Add Images</button>
+            <div class="img-url-row">
+              <input type="text" class="img-url-input" data-form="spell" placeholder="Or paste image URL&hellip;" autocomplete="off"/>
+              <button class="img-url-btn" data-form="spell" type="button">Add</button>
+            </div>
+          </div>
+          <div class="img-preview-strip" id="img-preview-strip-spell"></div>
+        </div>
+
+      </div><!-- /form-spell -->
+
+
+      <!-- ══════════════════════════════
+           RITUAL / ALTAR COMPOSER
+      ══════════════════════════════ -->
+      <div class="entry-form hidden" id="form-ritual">
+        <div class="composer-field">
+          <input type="text" id="ritual-title" class="composer-title-input" placeholder="Ritual / Altar name&hellip;" autocomplete="off" spellcheck="true"/>
+        </div>
+
+        <!-- Sabbat / Esbat -->
+        <div class="composer-row">
+          <label class="composer-label">Occasion</label>
+          <div class="pill-grid" id="ritual-occasion-grid">
+            <button class="pill-btn active" data-val="esbat">&#x1F315; Esbat</button>
+            <button class="pill-btn" data-val="samhain">&#x1F480; Samhain</button>
+            <button class="pill-btn" data-val="yule">&#x2744;&#xFE0F; Yule</button>
+            <button class="pill-btn" data-val="imbolc">&#x1F56F; Imbolc</button>
+            <button class="pill-btn" data-val="ostara">&#x1F338; Ostara</button>
+            <button class="pill-btn" data-val="beltane">&#x1F525; Beltane</button>
+            <button class="pill-btn" data-val="litha">&#x2600;&#xFE0F; Litha</button>
+            <button class="pill-btn" data-val="lughnasadh">&#x1F33E; Lughnasadh</button>
+            <button class="pill-btn" data-val="mabon">&#x1F342; Mabon</button>
+            <button class="pill-btn" data-val="other">&#x1F300; Other</button>
+          </div>
+        </div>
+
+        <!-- Altar layout -->
+        <div class="composer-row">
+          <label class="composer-label">Altar Layout &amp; Items</label>
+          <textarea id="ritual-altar" class="composer-body" style="min-height:100px" placeholder="Describe altar setup, tools, direction correspondences, deity representations&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Deity invocations -->
+        <div class="composer-row">
+          <label class="composer-label">Deity Invocations</label>
+          <textarea id="ritual-deities" class="composer-body" style="min-height:60px" placeholder="God, Goddess, or specific deities called&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Ritual notes -->
+        <div class="composer-row">
+          <label class="composer-label">Ritual Notes &amp; Observations</label>
+          <textarea id="ritual-notes" class="composer-body" style="min-height:120px" placeholder="Order of working, energy raised, signs received, reflections&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <div class="composer-row">
+          <label class="composer-label">Tags</label>
+          <input type="text" id="ritual-tags" class="composer-tags-input" placeholder="tag1, tag2&hellip;" autocomplete="off"/>
+        </div>
+
+        <!-- ── IMAGE UPLOAD — Ritual ── -->
+        <div class="img-upload-section">
+          <label class="composer-label">Images</label>
+          <div class="img-upload-controls">
+            <button class="img-pick-btn" data-form="ritual" type="button">&#x1F4CE; Add Images</button>
+            <div class="img-url-row">
+              <input type="text" class="img-url-input" data-form="ritual" placeholder="Or paste image URL&hellip;" autocomplete="off"/>
+              <button class="img-url-btn" data-form="ritual" type="button">Add</button>
+            </div>
+          </div>
+          <div class="img-preview-strip" id="img-preview-strip-ritual"></div>
+        </div>
+
+      </div><!-- /form-ritual -->
+
+
+      <!-- ══════════════════════════════
+           REDE / CHANT / BLESSING COMPOSER
+      ══════════════════════════════ -->
+      <div class="entry-form hidden" id="form-rede">
+        <div class="composer-field">
+          <input type="text" id="rede-title" class="composer-title-input" placeholder="Title&hellip;" autocomplete="off" spellcheck="true"/>
+        </div>
+
+        <!-- Sub-type -->
+        <div class="composer-row">
+          <label class="composer-label">Type</label>
+          <div class="pill-grid" id="rede-type-grid">
+            <button class="pill-btn active" data-val="rede">&#x1F4DC; Rede</button>
+            <button class="pill-btn" data-val="chant">&#x1F3B6; Chant</button>
+            <button class="pill-btn" data-val="blessing">&#x1F64F; Blessing</button>
+            <button class="pill-btn" data-val="invocation">&#x1F56F; Invocation</button>
+            <button class="pill-btn" data-val="prayer">&#x1F319; Prayer</button>
+            <button class="pill-btn" data-val="affirmation">&#x2728; Affirmation</button>
+          </div>
+        </div>
+
+        <!-- Full text -->
+        <div class="composer-row">
+          <label class="composer-label">Text</label>
+          <textarea id="rede-body" class="composer-body" style="min-height:240px" placeholder="Enter the full text&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <!-- Source / attribution -->
+        <div class="composer-row">
+          <label class="composer-label">Source / Attribution</label>
+          <input type="text" id="rede-source" class="composer-tags-input" placeholder="Traditional, author, original&hellip;" autocomplete="off"/>
+        </div>
+
+        <div class="composer-row">
+          <label class="composer-label">Tags</label>
+          <input type="text" id="rede-tags" class="composer-tags-input" placeholder="tag1, tag2&hellip;" autocomplete="off"/>
+        </div>
+
+        <!-- ── IMAGE UPLOAD — Rede ── -->
+        <div class="img-upload-section">
+          <label class="composer-label">Images</label>
+          <div class="img-upload-controls">
+            <button class="img-pick-btn" data-form="rede" type="button">&#x1F4CE; Add Images</button>
+            <div class="img-url-row">
+              <input type="text" class="img-url-input" data-form="rede" placeholder="Or paste image URL&hellip;" autocomplete="off"/>
+              <button class="img-url-btn" data-form="rede" type="button">Add</button>
+            </div>
+          </div>
+          <div class="img-preview-strip" id="img-preview-strip-rede"></div>
+        </div>
+
+      </div><!-- /form-rede -->
+
+
+      <!-- ══════════════════════════════
+           TAROT COMPOSER
+      ══════════════════════════════ -->
+      <div class="entry-form hidden" id="form-tarot">
+
+        <!-- Spread selector -->
+        <div class="composer-row">
+          <label class="composer-label">Spread</label>
+          <div class="spread-selector" id="spread-selector">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Invoke button -->
+        <div class="tarot-invoke-bar">
+          <div class="tarot-invoke-info">
+            <span id="spread-name-label" class="spread-name-label">Witches&rsquo; Cross</span>
+            <span id="spread-count-label" class="spread-count-label">10 cards</span>
+          </div>
+          <button class="btn-invoke" id="btn-invoke">&#x1F52E; Cast the Circle</button>
+        </div>
+
+        <!-- Card layout display -->
+        <div class="tarot-layout-wrap">
+          <div class="tarot-layout" id="tarot-layout">
+            <div class="tarot-layout-empty">Select a spread and cast the circle to draw cards.</div>
+          </div>
+        </div>
+
+        <!-- Reading view toggle -->
+        <div class="tarot-view-bar" id="tarot-view-bar" style="display:none">
+          <button class="view-tab active" data-view="narrative">Narrative</button>
+          <button class="view-tab" data-view="cards">Cards</button>
+        </div>
+
+        <!-- Narrative reading -->
+        <div id="tarot-narrative" class="tarot-narrative" style="display:none"></div>
+
+        <!-- Cards grid reading -->
+        <div id="tarot-cards-grid" class="tarot-cards-grid" style="display:none"></div>
+
+        <!-- Intuitive notes -->
+        <div class="composer-row" id="tarot-notes-row" style="display:none">
+          <label class="composer-label">Your Interpretation &amp; Notes</label>
+          <textarea id="tarot-notes" class="composer-body" style="min-height:100px" placeholder="Your personal reading, feelings, messages received&hellip;" spellcheck="true"></textarea>
+        </div>
+
+        <div class="composer-row" id="tarot-tags-row" style="display:none">
+          <label class="composer-label">Tags</label>
+          <input type="text" id="tarot-tags" class="composer-tags-input" placeholder="tag1, tag2&hellip;" autocomplete="off"/>
+        </div>
+
+        <!-- ── IMAGE UPLOAD — Tarot ── -->
+        <div class="img-upload-section">
+          <label class="composer-label">Images</label>
+          <div class="img-upload-controls">
+            <button class="img-pick-btn" data-form="tarot" type="button">&#x1F4CE; Add Images</button>
+            <div class="img-url-row">
+              <input type="text" class="img-url-input" data-form="tarot" placeholder="Or paste image URL&hellip;" autocomplete="off"/>
+              <button class="img-url-btn" data-form="tarot" type="button">Add</button>
+            </div>
+          </div>
+          <div class="img-preview-strip" id="img-preview-strip-tarot"></div>
+        </div>
+
+      </div><!-- /form-tarot -->
+
+
+      <!-- ── ACTION BAR — shared across all forms ── -->
+      <div class="composer-actions">
+        <button class="btn-clear" id="btn-clear">Clear</button>
+        <div class="composer-actions-right">
+          <span id="save-status" class="save-status"></span>
+          <button class="btn-save" id="btn-save" disabled>&#x1F4BE; Save to Grimoire</button>
+        </div>
+      </div>
+
+    </div><!-- /composer -->
+
+
+    <!-- ── RECENT PANEL ── -->
+    <div id="recent-panel">
+      <div class="recent-header">
+        <span class="recent-title">Grimoire</span>
+        <div class="recent-filters" id="recent-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="journal">&#x1F4D3;</button>
+          <button class="filter-btn" data-filter="spell">&#x1F52E;</button>
+          <button class="filter-btn" data-filter="ritual">&#x1F56F;</button>
+          <button class="filter-btn" data-filter="rede">&#x1F4DC;</button>
+          <button class="filter-btn" data-filter="tarot">&#x1F0CF;</button>
+        </div>
+      </div>
+      <div class="recent-count-bar">
+        <span class="recent-count" id="recent-count">0 entries</span>
+      </div>
+
+      <!-- ── Grimoire Search + Autosuggest ── -->
+      <div class="grimoire-search-wrap">
+        <input  type="text"   id="grimoire-search"       class="grimoire-search-input" placeholder="Search the Grimoire&hellip;" autocomplete="off" spellcheck="false"/>
+        <button type="button" id="grimoire-search-clear"  class="grimoire-search-clear" style="display:none">&#x2715;</button>
+        <div id="grimoire-suggest" class="grimoire-suggest" style="display:none"></div>
+      </div>
+
+      <div id="recent-list" class="recent-list">
+        <div class="recent-empty">Your Book of Shadows is empty.<br/>Begin your first entry above.</div>
+      </div>
+    </div><!-- /recent-panel -->
+
+  </div><!-- /main -->
+
+
+  <!-- ── FOOTER ── -->
+  <footer id="footer">
+    <span class="footer-sig">~/>  Book of Shadows  &middot;  0x75</span>
+    <span class="footer-entry-count" id="footer-count">&mdash; entries</span>
+  </footer>
+
+
+  <!-- ══════════════════════════════
+       READER MODAL
+  ══════════════════════════════ -->
+  <div id="overlay-reader" class="overlay" style="display:none" role="dialog" aria-modal="true" aria-label="Grimoire Reader">
+    <div class="reader-modal">
+
+      <div class="reader-header">
+        <div class="reader-header-left">
+          <span class="reader-title">Grimoire</span>
+          <span class="reader-subtitle" id="reader-subtitle">All Entries</span>
+        </div>
+        <div class="reader-header-right">
+          <input type="text" class="reader-search" id="reader-search" placeholder="Search the Book&hellip;"/>
+          <select class="reader-filter-sel" id="reader-filter-type">
+            <option value="">All types</option>
+            <option value="journal">&#x1F4D3; Journal</option>
+            <option value="spell">&#x1F52E; Spell</option>
+            <option value="ritual">&#x1F56F; Ritual</option>
+            <option value="rede">&#x1F4DC; Rede</option>
+            <option value="tarot">&#x1F0CF; Tarot</option>
+          </select>
+          <select class="reader-filter-sel" id="reader-filter-cat">
+            <option value="">All categories</option>
+          </select>
+          <button class="reader-sort-btn" id="reader-sort">&#x2193; Newest</button>
+          <button class="reader-close-btn" id="reader-close">&#x2715;</button>
+        </div>
+      </div>
+
+      <div class="reader-body" id="reader-body">
+        <!-- Entries rendered by JS -->
+      </div>
+
+    </div>
+  </div><!-- /overlay-reader -->
+
+
+  <!-- ══════════════════════════════
+       CALENDAR MODAL
+  ══════════════════════════════ -->
+  <div id="overlay-calendar" class="overlay" style="display:none" role="dialog" aria-modal="true" aria-label="Wheel of the Year">
+    <div class="calendar-modal">
+
+      <div class="calendar-header">
+        <button class="cal-nav-btn" id="cal-prev">&#x25C4;</button>
+        <span class="cal-month-label" id="cal-month-label">April 2026</span>
+        <button class="cal-nav-btn" id="cal-next">&#x25BA;</button>
+        <button class="reader-close-btn" id="calendar-close" style="margin-left:auto">&#x2715;</button>
+      </div>
+
+      <div class="wheel-strip" id="wheel-strip"></div>
+
+      <div class="cal-grid-header">
+        <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span>
+        <span>Thu</span><span>Fri</span><span>Sat</span>
+      </div>
+      <div class="cal-grid" id="cal-grid"></div>
+
+      <div class="moon-legend">
+        <span class="moon-item">&#x1F311; New</span>
+        <span class="moon-item">&#x1F312; Waxing</span>
+        <span class="moon-item">&#x1F315; Full</span>
+        <span class="moon-item">&#x1F318; Waning</span>
+      </div>
+
+      <div class="upcoming-sabbats" id="upcoming-sabbats"></div>
+
+      <div class="cal-entries" id="cal-entries">
+        <div class="cal-entries-label" id="cal-entries-label">Select a date to view entries</div>
+        <div id="cal-entries-list"></div>
+      </div>
+
+    </div>
+  </div><!-- /overlay-calendar -->
+
+
+  <!-- ══════════════════════════════
+       DELETE CONFIRM MODAL
+  ══════════════════════════════ -->
+  <div id="overlay-delete" class="overlay" style="display:none" role="dialog" aria-modal="true">
+    <div class="modal-sm">
+      <h3>Remove Entry?</h3>
+      <p>This cannot be undone. The entry will be removed from your Book of Shadows.</p>
+      <div class="modal-actions">
+        <button class="btn-sec" id="delete-cancel">Cancel</button>
+        <button class="btn-danger" id="delete-confirm">Remove</button>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════
+       HIDDEN FILE INPUT
+       Single shared input — JS clicks and wires it per active form.
+       accept="image/*" — JPEG, PNG, GIF, WebP all supported.
+       multiple — allows batch selection.
+  ══════════════════════════════ -->
+  <input type="file" id="img-file-input" accept="image/*" multiple style="display:none" aria-hidden="true"/>
+
+
+</div><!-- /app -->
+
+<!-- ── JavaScript ── -->
+<script src="wiccan-main.js"></script>
+
+</body>
+</html>
